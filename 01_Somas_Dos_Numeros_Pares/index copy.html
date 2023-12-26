@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma dos Números Pares</title>
+    <style>
+        * {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Soma dos Números Pares</h1>
+    <input type="number" id="num">
+    <button onclick="adicionarNumero()">Adicionar Número Par</button>
+    <br>
+    <button id="but">Finalizar</button>
+    <div id="res"></div>
+
+    <script>
+        const numInput = document.getElementById('num');
+        const res = document.getElementById('res');
+        const finalizarButton = document.getElementById('but');
+        const valores = [];
+
+        finalizarButton.addEventListener('click', finalizar);
+
+        function adicionarNumero() {
+            const num = Number(numInput.value);
+            if (num % 2 === 0) {
+                valores.push(num);
+                // Feedback visual
+                res.innerHTML = `Número ${num} adicionado com sucesso!`;
+            } else {
+                // Mensagem de erro
+                res.innerHTML = 'Digite um número par!';
+            }
+            
+            console.log(valores);
+            numInput.value = '';
+            numInput.focus();
+        }
+
+        function finalizar() {
+            let soma = valores.reduce((total, num) => total + num, 0);
+            res.innerHTML = `A soma entre todos os números é: ${soma}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somas dos Numeros Pares</title>
+    <style>
+        * {
+            font-family: monospace;
+        }
+
+        #but {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Soma dos Números Pares</h1>
+    <input type="number" name="" id="num">
+    <button onclick="enviar()">Enviar</button>
+    <br>
+    <button id="but">Finalizar</button>
+    <div id="res"></div>
+    
+    <script>
+        let num = document.getElementById('num')
+        let res = document.getElementById('res')
+        let but = document.getElementById('but')
+        let valores = []
+
+        but.addEventListener('click', finalizar)
+
+        function ePar(){
+            if(num.value % 2 === 0){
+                return true
+            } else {
+                return false
+            }
+        }
+
+        function enviar(){
+            if(ePar()){
+                valores.push(Number(num.value))
+                but.style.display = 'block'
+            } else {
+                window.alert('Digite um Número Par!')
+            }
+            
+            console.log(valores)
+            num.value = ''
+            num.focus() // Mantém o curso no input
+            res.innerHTML = ''
+        }
+
+        function finalizar(){
+            let soma = 0
+            for(let pos in valores){
+                soma += valores[pos]
+            }
+            res.innerHTML += `A soma entre todos o números é: ${soma}`
+        }
+        </script>
+</body>
+</html>

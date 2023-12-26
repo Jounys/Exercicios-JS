@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palíndromo</title>
+</head>
+<body>
+    <h1>Verificador de PALÍNDROMO</h1>
+    <input type="text" id="txt">
+    <input type="button" value="Verificar" id="but">
+    
+    <div id="res">
+    </div>
+    <script>
+        const txt = document.getElementById('txt')
+        const but = document.getElementById('but')
+        let res = document.getElementById('res')
+
+        but.addEventListener('click', isPalidrome)
+
+        function isPalidrome(){
+            // Normaliza a string removendo espaços e pontuações, e convertendo para minúsculas
+            const normalizedStr = txt.value.replace(/[^\w]/g, '').toLowerCase();
+
+            // Inverte a string normalizada
+            const reversedStr = normalizedStr.split('').reverse().join('');
+
+            // Compara a string original com a sua versão invertida
+            let x = normalizedStr === reversedStr 
+            if(x === true){
+                res.innerHTML += `${txt.value} é um Palíndromo`
+            } else {
+                res.innerHTML += `${txt.value} não é um Palíndromo`
+            }
+            console.log(x)
+        }
+    </script>
+</body>
+</html>

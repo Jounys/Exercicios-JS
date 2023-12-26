@@ -1,0 +1,6 @@
+Se você quiser substituir todas as ocorrências, em vez de apenas a primeira, pode usar uma expressão 
+regular com a flag global (/g). Aqui está um exemplo:
+
+(/exemplo/g)  é usado para substituir todas as ocorrências 
+
+let novaFrase = frase.replace(/JavaScript/g, "Python");

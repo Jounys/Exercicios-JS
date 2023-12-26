@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removendo elemento</title>
+</head>
+<body>
+    <div id="res">Item</div>
+    <button id="remover">Remover</button>
+    <script>
+        let res = document.getElementById('res')
+        let remover = document.getElementById('remover').addEventListener('click', removerElemento)
+        // remover.addEventListener('click', removerElemento)
+
+        function removerElemento(){
+            res.remove()
+        }
+
+    </script>
+</body>
+</html>

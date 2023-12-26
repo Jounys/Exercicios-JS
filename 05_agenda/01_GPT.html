@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo parentNode</title>
+</head>
+<body>
+
+    <div id="container">
+        <p id="paragrafo">Este é um parágrafo.</p>
+        <button onclick="removerParagrafo()">Remover Parágrafo</button>
+    </div>
+
+    <script>
+        function removerParagrafo() {
+            // Selecione o elemento que deseja remover
+            let paragrafoParaRemover = document.getElementById("paragrafo");
+
+            // Selecione o pai do elemento que deseja remover
+            let paiDoParagrafo = paragrafoParaRemover.parentNode;
+
+            // Remova o elemento usando o método parentNode.removeChild()
+            paiDoParagrafo.removeChild(paragrafoParaRemover);
+        }
+    </script>
+
+</body>
+</html>
