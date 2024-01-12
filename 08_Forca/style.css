@@ -1,0 +1,19 @@
+.container{
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    font-family: monospace;
+    font-size: 20px;
+}
+#res {
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid black;
+    width: 250px;
+}
+
+#letrasEnviadas {
+    width: 200px;
+    height: 300px;
+    border: 1px solid black;
+}
