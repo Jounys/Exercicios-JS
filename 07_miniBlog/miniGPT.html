@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Armazenar Dados em um Array</title>
+</head>
+<body>
+
+  <label for="inputDados">Digite um valor:</label>
+  <input type="text" id="inputDados">
+  <button onclick="adicionarDado()">Adicionar</button>
+
+  <ul id="listaDados"></ul>
+
+  <script>
+    // Array vazio para armazenar dados
+    let arrayDeObjetos = [];
+
+    function adicionarDado() {
+      // Obter o valor do input
+      let valorInput = document.getElementById('inputDados').value;
+
+      // Verificar se o valor não está vazio
+      if (valorInput.trim() !== '') {
+        // Criar um objeto e adicionar ao array
+        let novoObjeto = { dado: valorInput };
+        arrayDeObjetos.push(novoObjeto);
+
+        // Atualizar a lista na página
+        atualizarLista();
+      }
+
+      // Limpar o input
+      document.getElementById('inputDados').value = '';
+    }
+
+    function atualizarLista() {
+      // Limpar a lista
+      document.getElementById('listaDados').innerHTML = '';
+
+      // Adicionar cada objeto ao elemento de lista na página
+      arrayDeObjetos.forEach(objeto => {
+        let li = document.createElement('li');
+        li.textContent = objeto.dado;
+        document.getElementById('listaDados').appendChild(li);
+      });
+    }
+  </script>
+
+</body>
+</html>

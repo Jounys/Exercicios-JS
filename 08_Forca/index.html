@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca</title>
+    <style>
+        .container{
+            text-align: center;
+        }
+        #res {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo da Forca</h1>
+        <div id="entrada">
+            <input type="text" id="txt">
+            <input type="button" id="botaoEnviar" value="Enviar">
+        </div>
+        <div id="res">
+            <div id="letras"></div>
+        </div>
+    </div>
+
+
+    <script>
+        let letras = []
+        let vida = 25
+        let forca = 'arroz'
+        document.getElementById('botaoEnviar').addEventListener('click', () => {
+            const txt = document.getElementById('txt').value
+            const res = document.getElementById('res')
+            const letrasForca = document.getElementById('letras')
+            
+            for(let i = 0; i < forca.length; i++){
+                if(forca[i].includes(txt)){
+                    letras.push(txt)
+                    res.innerHTML += 'Positivo '
+                    letrasForca.innerHTML += txt
+                } else {
+                    res.innerHTML += 'Negativo '
+                    vida--
+                }
+            }
+            console.log(letras)
+            console.log(vida)
+        })
+    </script>
+</body>
+</html>
