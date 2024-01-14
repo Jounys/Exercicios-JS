@@ -1,7 +1,6 @@
 // Verificar se a letra ja foi enviada e se for verdade retornar -(menos) uma vida
 // Add as letras enviadas em um array para comparação futura
 // Verificar se a letra está correta e imprimir na tela
-// 
 let letras = []
 let vida = 5
 let palavraAleatoria = ['arroz', 'carne', 'feijao', 'maria', 'tapioca', 'cafe']
@@ -9,7 +8,6 @@ let palavraAleatoria = ['arroz', 'carne', 'feijao', 'maria', 'tapioca', 'cafe']
 const numAleatorio = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 const pegarPalavra = () => palavraAleatoria[numAleatorio(0, palavraAleatoria.length - 1)]
 let forca = pegarPalavra()
-console.log(forca)
 
 document.getElementById('botaoEnviar').addEventListener('click', () => {
     const txt = document.getElementById('txt').value
@@ -17,6 +15,7 @@ document.getElementById('botaoEnviar').addEventListener('click', () => {
     const vidaMostrar = document.getElementById('vida')
     const letrasForca = document.getElementById('letras')
 
+    // Add as letras do user no array e se não for true perde uma vida e verifica se a letra ja foi enviado perdendo uma vida tbm
     if(letras.includes(txt)){
         alert('letras ja enviada')
         vida--
@@ -28,24 +27,28 @@ document.getElementById('botaoEnviar').addEventListener('click', () => {
             vida--
             vidaMostrar.innerHTML = `Vidas: ${vida}`
         }
-        letrasForca.innerHTML += txt
+        letrasForca.innerHTML += `${txt} `
     }
 
     if(vida <= 0){
         alert('Fim de jogo. Você perdeu!')
     }
-    
-    if(!txt.trim() === ''){
+
+    let array = forca.split('')
+    let letrasAdivinhadas = '';
+
+    if(txt.trim() === ''){
         alert('Digite uma letra.')
     } else {
-        for(let i = 0; i < forca.length; i++){
-            if(forca[i] === txt){
-                res.innerHTML += txt   
+        for(let i = 0; i < array.length; i++){
+            if(letras.includes(array[i])){ 
+                letrasAdivinhadas += `${array[i]} `    
             } else {
-                //vida--
+                letrasAdivinhadas += '_ ';
             }
         }
-        console.log('Fim')
+        res.innerHTML = letrasAdivinhadas;
+        console.log(letrasAdivinhadas)
     }
 
     if (forca.split('').every(letra => letras.includes(letra))) {
