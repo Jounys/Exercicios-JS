@@ -2,12 +2,13 @@
 // Add as letras enviadas em um array para comparação futura
 // Verificar se a letra está correta e imprimir na tela
 let letras = []
-let vida = 5
-let palavraAleatoria = ['arroz', 'carne', 'feijao', 'maria', 'tapioca', 'cafe']
+let vida = 8
+let palavraAleatoria = ['arroz', 'carne', 'feijao', 'maria', 'tapioca', 'cafe', 'macarrao', 'munguza', 'frango', 'joao', 'fernando', 'rita', 'rebeca', 'josefa', 'wilson', 'ilza', 'rian', 'zara', 'suzi', 'luva', 'cadeira', 'telivisao']
 
 const numAleatorio = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 const pegarPalavra = () => palavraAleatoria[numAleatorio(0, palavraAleatoria.length - 1)]
 let forca = pegarPalavra()
+console.log(forca)
 
 document.getElementById('botaoEnviar').addEventListener('click', jogar)
 
@@ -16,6 +17,10 @@ function jogar(){
     const res = document.getElementById('res')
     const vidaMostrar = document.getElementById('vida')
     const letrasForca = document.getElementById('letras')
+
+    if(txt.toLowerCase() === ''){
+        alert('Digite uma letra.')
+    }
 
     // Add as letras do user no array e se não for true perde uma vida e verifica se a letra ja foi enviado perdendo uma vida tbm
     if(letras.includes(txt)){
@@ -36,22 +41,18 @@ function jogar(){
         alert('Fim de jogo. Você perdeu!')
     }
 
-    let array = forca.split('')
     let letrasAdivinhadas = '';
 
-    if(txt.trim() === ''){
-        alert('Digite uma letra.')
-    } else {
-        for(let i = 0; i < array.length; i++){
-            if(letras.includes(array[i])){ 
-                letrasAdivinhadas += `${array[i]} `    
-            } else {
-                letrasAdivinhadas += '_ ';
-            }
+    for(let i = 0; i < forca.length; i++){
+        if(letras.includes(forca[i])){ 
+            letrasAdivinhadas += `${forca[i]} `    
+        } else {
+            letrasAdivinhadas += '_ ';
         }
-        res.innerHTML = letrasAdivinhadas;
-        console.log(letrasAdivinhadas)
     }
+
+    res.innerHTML = letrasAdivinhadas;
+    console.log(letrasAdivinhadas)
 
     if (forca.split('').every(letra => letras.includes(letra))) {
         alert('Parabéns! Você acertou a palavra!');
