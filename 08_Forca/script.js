@@ -9,8 +9,9 @@ const pegarPalavra = () => palavraAleatoria[numAleatorio(0, palavraAleatoria.len
 let vida = 6
 let letras = []
 let forca = pegarPalavra()
+console.log(forca)
 
-document.getElementById('dicaInicial').innerHTML = `Dica: Tem ${forca.length} letras.`
+//document.getElementById('dicaInicial').innerHTML = `Dica: Tem ${forca.length} letras.`
 document.getElementById('botaoEnviar').addEventListener('click', jogar)
 
 function jogar(){
@@ -56,6 +57,7 @@ function jogar(){
     console.log(letras)
     console.log(vida)
 }
+let letrasAdivinhadas = '';
 
 function atualizarPalavra(){
     let letrasAdivinhadas = '';
@@ -70,14 +72,21 @@ function atualizarPalavra(){
     res.innerHTML = letrasAdivinhadas
 }
 
+function letrasAtt(){
+    res.innerHTML = letrasAdivinhadas;
+    atualizarPalavra()
+}
+
 function reiniciarJogo(){
     letras = [];
-    vida = 8;
+    vida = 6;
     forca = pegarPalavra();
     location.reload(true);
-
+    console.log(forca)
     document.getElementById('txt').value = '';
     document.getElementById('res').innerHTML = '';
     document.getElementById('letras').innerHTML = '';
     document.getElementById('vida').innerHTML = `Vidas: ${vida}`;
+    //document.getElementById('dicaInicial').innerHTML = `Dica: Tem ${forca.length} letras.`
 }
+letrasAtt();
