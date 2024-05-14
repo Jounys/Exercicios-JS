@@ -10,13 +10,14 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            text-align: center;
+            height: 100vh;
+        }
+        
+        .container {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-        }
-
-        .container {
             text-align: center;
         }
 
@@ -25,7 +26,7 @@
             margin-right: 8px;
         }
 
-        input[type="button"] {
+        input[type="submit"] {
             padding: 8px;
             cursor: pointer;
         }
@@ -45,11 +46,14 @@
     </style>
 </head>
 <body>
-    <h1>Minha agenda</h1>
-    <div class="container">
+    <h1>Minha agenda</h1> 
+    <form class="container" id="meu-form">
+
         <input type="text" name="" id="adicionar">
-        <input type="button" value="Enviar" onclick="adicionar()">
+        <input type="submit" value="Enviar">
         
+    </form>
+    <div>
         <ul></ul>
     </div>
 
@@ -57,7 +61,11 @@
         let anotacao = document.getElementById('adicionar')
         let ul = document.querySelector('ul')
 
-        function adicionar(){
+        document.getElementById('meu-form').addEventListener('submit', adicionar)
+
+        function adicionar(evento){
+            evento.preventDefault();
+            
             if(anotacao.value.trim() !== ''){
                 let novoLi = document.createElement('li')
                 novoLi.innerText = anotacao.value
@@ -66,10 +74,14 @@
                 anotacao.value = '';
                 anotacao.focus()
 
-                newLi.addEventListener('click', function () {newLi.remove()})
+                newLi.addEventListener('click', removerItem)
             } else {
                 alert('Digite algo')
             }
+        }
+
+        function removerItem(evento){
+            evento.target.remove()
         }
     </script>
 </body>
