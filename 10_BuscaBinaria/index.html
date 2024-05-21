@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Adivinhe o Número secreto</h1>
+        <div>
+            <div class="att-tentativas">Tentativas: 0</div>
+            <form id="form">
+                <label for="pergunta"></label>
+                <input type="number" name="" id="pergunta" placeholder="Adivinhe um número...">
+                <!-- <input type="submit" value="Enviar"> -->
+            </form>
+        </div>
+        <div id="att">...</div>
+    </main>
+    <div id="win">
+        <button id="reinicio" onclick="resetGame()">Reiniciar</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
