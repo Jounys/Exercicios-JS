@@ -1,30 +1,33 @@
 let att = document.querySelector('#att');
 let attTentativas = document.querySelector('.att-tentativas');
-let reinicio = document.querySelector('#reinicio')
+let reinicio = document.querySelector('#reinicio');
 let winner = document.querySelector('#win');
+let attMen = document.querySelector('#attMen')
+let attTent = document.querySelector('#attTent')
+let pergunta = document.querySelector('#pergunta')
 
-let aleatorio = Math.ceil(Math.random() * 100);
- 
+// Gera um valor aleatorio
+let aleatorio = () => Math.ceil(Math.random() * 100);
+let ale = aleatorio()
+
 let tentativas = 1;
-let venceu = false;
+let venceu = false; // Ta aqui so de enfeite por enquanto rs
 
+// Escuta o evento de envio do form
 document.querySelector('#form').addEventListener('submit', abobora)
 
+// Função principal
 function abobora(evento){
     evento.preventDefault()
-    let pergunta = Number(document.querySelector('#pergunta').value)
+    let perguntaReal = Number(pergunta.value)
     
-    if(!pergunta == ''){
+    if(!pergunta.value == ''){
         
-        if(pergunta > aleatorio){
+        if(perguntaReal > ale){
             att.innerHTML = `Muito alto`
-            console.log('Muito alto')
-        } else if(pergunta < aleatorio) {
+        } else if(perguntaReal < ale) {
             att.innerHTML = `Muito baixo`
-            console.log('Muito baixo')
-
         } else {
-            att.innerHTML = `Muito bem! O número secreto era: ${aleatorio}`
             console.log('Muito bem')
             venceu = true;
             win()
@@ -32,9 +35,11 @@ function abobora(evento){
 
         attVisual()
         console.log(venceu)
+        console.log(perguntaReal)
     }
 }
 
+// Resposta visual para o usuario
 function attVisual(){
     attTentativas.classList.add('att-background')
     attTentativas.innerHTML = `Tentativas: ${tentativas++}`
@@ -43,16 +48,21 @@ function attVisual(){
     }, 300)
 }
 
+// Chama uma tela de vitoria
 function win(){
     winner.style.display = 'block'
+    attMen.innerHTML = `Muito bem! </br> O número secreto era: ${ale}</br>`
+    attTent.innerHTML = `Você usou ${tentativas} tentativas.`;
 }
 
+// Limpa os parametros para reiniciar o jogo
 function resetGame(){
+    attMen.innerHTML = ''
+    attTent.innerHTML = ''
+    pergunta.value = '';
     tentativas = 0;
     venceu = false;
-    attTentativas.innerHTML = `Tentativas: ${tentativas}`
+    ale = aleatorio()
     winner.style.display = 'none'
+    attTentativas.innerHTML = `Tentativas: ${tentativas}`;
 }
-
-console.log(venceu)
-console.log(aleatorio)
