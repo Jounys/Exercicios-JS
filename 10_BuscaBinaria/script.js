@@ -60,7 +60,7 @@ function resetGame(){
     attMen.innerHTML = ''
     attTent.innerHTML = ''
     pergunta.value = '';
-    tentativas = 0;
+    tentativas = 1;
     venceu = false;
     ale = aleatorio()
     winner.style.display = 'none'
