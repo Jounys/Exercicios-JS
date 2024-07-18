@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha agenda</title>
+</head>
+<body>
+    <h1>Minha agenda</h1> 
+    <form class="container" id="meu-form">
+        <input type="text" id="adicionar" placeholder="Digite sua anotação" autocomplete="off">
+        <input type="submit" value="Adicionar">
+    </form>
+    <div>
+        <ul id="anotacoes"></ul>
+    </div>
+
+    <script>
+        // Função construtora para criar objetos de anotação
+        function Anotacao(texto) {
+            this.texto = texto;
+        }
+
+        // Array para armazenar as anotações
+        let anotacoes = [];
+
+        // Elementos do DOM
+        let formulario = document.getElementById('meu-form');
+        let campoAnotacao = document.getElementById('adicionar');
+        let listaAnotacoes = document.getElementById('anotacoes');
+
+        // Adicionando evento ao formulário
+        formulario.addEventListener('submit', function(evento) {
+            evento.preventDefault();
+
+            let textoAnotacao = campoAnotacao.value.trim();
+            if (textoAnotacao !== '') {
+                // Criar uma nova anotação
+                let novaAnotacao = new Anotacao(textoAnotacao);
+                anotacoes.push(novaAnotacao);
+
+                // Atualizar a lista de anotações
+                atualizarListaAnotacoes();
+
+                // Limpar o campo e focar nele
+                campoAnotacao.value = '';
+                campoAnotacao.focus();
+            } else {
+                alert('Digite algo');
+            }
+        });
+
+        // Função para atualizar a lista de anotações no DOM
+        function atualizarListaAnotacoes() {
+            // Limpar a lista antes de atualizar
+            listaAnotacoes.innerHTML = '';
+
+            // Adicionar cada anotação à lista
+            anotacoes.forEach(function(anotacao, indice) {
+                let novoItemLista = document.createElement('li');
+                novoItemLista.textContent = anotacao.texto;
+
+                // Adicionar um identificador de índice para facilitar a remoção
+                novoItemLista.dataset.indice = indice;
+
+                // Adicionar evento de clique para remover
+                novoItemLista.addEventListener('click', removerAnotacao);
+
+                listaAnotacoes.appendChild(novoItemLista);
+            });
+        }
+
+        // Função para remover uma anotação
+        function removerAnotacao(evento) {
+            let indice = evento.target.dataset.indice;
+            anotacoes.splice(indice, 1);
+            atualizarListaAnotacoes();
+        }
+        console.log(anotacoes)
+    </script>
+</body>
+</html>

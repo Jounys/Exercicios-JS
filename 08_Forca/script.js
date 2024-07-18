@@ -1,15 +1,17 @@
-// Verificar se a letra ja foi enviada e se for verdade retornar -(menos) uma vida
-// Add as letras enviadas em um array para comparação futura
-// Verificar se a letra está correta e imprimir na tela
-let palavraAleatoria = ['arroz', 'carne', 'feijao', 'maria', 'tapioca', 'cafe', 'macarrao', 'munguza', 'frango', 'joao', 'fernando', 'rita', 'rebeca', 'josefa', 'wilson', 'ilza', 'rian', 'zara', 'suzi', 'luva', 'cadeira', 'telivisao']
+import { palavras } from "./palavras.js"
+let palavraChave = palavras
 
 const res = document.getElementById('res')
 const numAleatorio = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
-const pegarPalavra = () => palavraAleatoria[numAleatorio(0, palavraAleatoria.length - 1)]
+const pegarPalavra = () => palavraChave[numAleatorio(0, palavraChave.length - 1)]
 let vida = 6
 let letras = []
-let forca = pegarPalavra()
+let objetoDeInformacoes = pegarPalavra()
+let forca = objetoDeInformacoes.palavra
+let dicaFacil = objetoDeInformacoes.dica_facil
+console.log(objetoDeInformacoes)
 console.log(forca)
+console.log(dicaFacil)
 
 //document.getElementById('dicaInicial').innerHTML = `Dica: Tem ${forca.length} letras.`
 document.getElementById('botaoEnviar').addEventListener('click', jogar)
@@ -21,6 +23,7 @@ function jogar(){
 
     if(txt === ''){
         alert('Digite uma letra.')
+        return
     }
 
     // Add as letras do user no array e se não for true perde uma vida e verifica se a letra ja foi enviado perdendo uma vida tbm
@@ -39,6 +42,7 @@ function jogar(){
     if(vida <= 0){
         alert('Fim de jogo. Você perdeu!')
         reiniciarJogo();
+        return
     }
 
     atualizarPalavra()
@@ -48,7 +52,6 @@ function jogar(){
         alert('Parabéns! Você acertou a palavra!');
         console.log(forca.split(''))
         reiniciarJogo();
-        // Aqui você pode fazer o que desejar ao acertar a palavra, por exemplo, reiniciar o jogo.
     }
 
     document.getElementById('txt').value = '';
@@ -57,7 +60,6 @@ function jogar(){
     console.log(letras)
     console.log(vida)
 }
-let letrasAdivinhadas = '';
 
 function atualizarPalavra(){
     let letrasAdivinhadas = '';
@@ -72,21 +74,20 @@ function atualizarPalavra(){
     res.innerHTML = letrasAdivinhadas
 }
 
-function letrasAtt(){
-    res.innerHTML = letrasAdivinhadas;
-    atualizarPalavra()
-}
-
 function reiniciarJogo(){
-    letras = [];
+    objetoDeInformacoes = pegarPalavra()
+    forca = objetoDeInformacoes.palavra
+    dicaFacil = objetoDeInformacoes.dica_facil
     vida = 6;
-    forca = pegarPalavra();
-    location.reload(true);
-    console.log(forca)
+    letras = [];
     document.getElementById('txt').value = '';
     document.getElementById('res').innerHTML = '';
     document.getElementById('letras').innerHTML = '';
     document.getElementById('vida').innerHTML = `Vidas: ${vida}`;
+    
+    atualizarPalavra()
+    console.log(forca)
+    console.log(objetoDeInformacoes)
     //document.getElementById('dicaInicial').innerHTML = `Dica: Tem ${forca.length} letras.`
 }
-letrasAtt();
+atualizarPalavra()
